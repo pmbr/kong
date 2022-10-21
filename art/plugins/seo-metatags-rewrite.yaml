@@ -1,0 +1,31 @@
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: seo-metatags-rewrite
+  namespace: int
+config: 
+  replace:
+    uri: /Metatags/Info
+plugin: request-transformer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kong-ingress-dev-art-seo-service-metatags
+  namespace: int
+  annotations:
+    konghq.com/plugins: seo-metatags-rewrite
+spec:
+  ingressClassName: kong-qa-art
+  rules:
+  - http:
+      paths:
+      - path: /v2/metatags3
+        pathType: Prefix
+        backend:
+          service:
+            name: art-seo-service
+            port:
+              number: 80
+---

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kong-ingress-dev-art-product-service
+  namespace: int
+  annotations:
+    konghq.com/strip-path: "true"
+spec:
+  ingressClassName: kong-dev-art
+  rules:
+  - http:
+      paths:
+      - path: /product-service
+        pathType: Prefix
+        backend:
+          service:
+            name: art-product-service
+            port:
+              number: 80

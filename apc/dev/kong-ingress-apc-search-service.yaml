@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kong-ingress-dev-apc-search-service
+  namespace: npp5
+  annotations:
+    konghq.com/strip-path: "true"
+    konghq.com/plugins: "proxy-cache"
+spec:
+  ingressClassName: kong-dev-apc
+  rules:
+  - http:
+      paths:
+      - path: /search-service
+        pathType: Prefix
+        backend:
+          service:
+            name: apc-search-service
+            port:
+              number: 80

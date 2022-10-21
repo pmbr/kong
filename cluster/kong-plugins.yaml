@@ -1,0 +1,28 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: kong-cors-default
+config: 
+  origins: 
+  - '*'
+  methods:
+  - GET
+  - PUT
+  - POST
+  - DELETE
+  - PATCH
+  - OPTIONS  
+  headers:
+  - Origin
+  - x-requested-with
+  - Accept
+  - Content-Type
+  - Accept-Encoding
+  - Accept-Language
+  - Host
+  - Pragma
+  - Referrer
+  - User-Agent
+  - Cache-Control
+  max_age: 3628800
+plugin: cors
